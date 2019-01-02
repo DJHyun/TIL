@@ -10,3 +10,5 @@
 ```python
 n = input()
 ```
+
+- `print("hello", end="")` : end
