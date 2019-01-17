@@ -1,3 +1,5 @@
+# baekjoon source = "https://www.acmicpc.net/problem/15552"
+
 import sys
 
 for T in range(int(sys.stdin.readline())):

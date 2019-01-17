@@ -1,3 +1,5 @@
+# baekjoon source = "https://www.acmicpc.net/problem/4673"
+
 result = list(range(1,10001))
 
 for i in range(1,10001):

@@ -1,3 +1,5 @@
+# baekjoon source = "https://www.acmicpc.net/problem/1065"
+
 import sys
 
 N = int(sys.stdin.readline())
