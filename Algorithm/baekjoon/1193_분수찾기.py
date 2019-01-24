@@ -1,18 +1,20 @@
 import sys
 
 X = int(sys.stdin.readline().strip())
-result = [['1/1']]
-flag = True
 idx = 1
-i = 1
-while idx < X:
-    if len(result) < i:
-        if flag:
-            result[i-1].append([])
+cnt = 0
+result=[]
+for i in range(1,X+1):
+    cnt = int((i-1)*i*0.5+1)
+    if cnt == 1:
+        result.append(f'{cnt}/{cnt}')
+    elif cnt%2:
+        result.append(f'{cnt-1}/{cnt}')
+    else:    
+        result.append(f'{cnt}/{cnt-1}')
+
+print(result)     
     
-    
-    
-print(result)
 
 
         
