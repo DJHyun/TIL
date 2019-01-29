@@ -33,8 +33,13 @@ import sys
       아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 
       단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
+<<<<<<< HEAD
 """
 sys.stdin = open("재미있는오셀로게임.txt", "r")
+=======
+'''
+# sys.stdin = open("재미있는오셀로게임.txt", "r")
+>>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
@@ -42,6 +47,7 @@ for test_case in range(1, T + 1):
     # ///////////////////////////////////////////////////////////////////////////////////
     N, M = list(map(int, input().split()))
     result = []
+<<<<<<< HEAD
     for i in range(N):
         result.append([0] * N)
     for i in range(2):
@@ -50,12 +56,15 @@ for test_case in range(1, T + 1):
             result[N // 2 - 1][N // 2] = 1
         else:
             result[N // 2][N // 2 - 1] = 1
+=======
+>>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
 
     for m in range(M):
         test_x, test_y, tz = list(map(int, input().split()))
         tx, ty = test_x - 1, test_y - 1
         result[tx][ty] = tz
 
+<<<<<<< HEAD
         for i in range(2, N):
             x, y = [i, -i, 0, 0, i, -i, -i, i], [0, 0, i, -i, i, -i, i, -i]
             for j in range(8):
@@ -87,4 +96,75 @@ for test_case in range(1, T + 1):
         one += i.count(1)
         two += i.count(2)
     print(f"#{test_case} {one} {two}")
+=======
+    for i in range(n // 2 - 1, n // 2 + 1):
+        for j in range(n // 2 - 1, n // 2 + 1):
+            if i == j:
+                result[i][j] = 2
+            else:
+                result[i][j] = 1
+    for i in result:
+        print(i)
+    for i in range(m):
+        test = list(map(int, input().split()))
+        tx, ty, z = test[0] - 1, test[1] - 1, test[2]
+        result[tx][ty] = z
+        for j in range(2, n):
+            for a in range(4):
+                x, y = [0, 0, j, -j], [j, -j, 0, 0]
+                if tx + x[a] < 0 or tx + x[a] >= n or ty + y[a] < 0 or ty + y[a] >= n:
+                    continue
+                else:
+                    if result[tx + x[a]][ty + y[a]] == z:
+                        if x[a] == 0:
+                            if y[a] > 0:
+                                for aaa in range(ty, ty + y[a]):
+                                    if result[tx][aaa] != 0:
+                                        result[tx][aaa] = z
+                            else:
+                                for aaa in range(ty + y[a], ty):
+                                    if result[tx][aaa] != 0:
+                                        result[tx][aaa] = z
+                        else:
+                            if x[a] > 0:
+                                for aaa in range(tx, tx + x[a]):
+                                    if result[aaa][ty] != 0:
+                                        result[aaa][ty] = z
+                            else:
+                                for aaa in range(tx + x[a], tx):
+                                    if result[aaa][ty] != 0:
+                                        result[aaa][ty] = z
+        for j in range(2, n):
+            for a in range(4):
+                ax, ay = [j, j, -j, -j], [-j, j, -j, j]
+                if tx + ax[a] < 0 or tx + ax[a] >= n or ty + ay[a] < 0 or ty + ay[a] >= n:
+                    continue
+                else:
+                    if result[tx + ax[a]][ty + ay[a]] == z:
+                        if a == 0:
+                            for aaa in zip(range(tx + ax[a], tx, -1), range(ty + ay[a], ty)):
+                                if result[aaa[0]][aaa[1]] != 0:
+                                    result[aaa[0]][aaa[1]] = z
+                        elif a == 1:
+                            for aaa in zip(range(tx + ax[a], tx, -1), range(ty + ay[a], ty, -1)):
+                                if result[aaa[0]][aaa[1]] != 0:
+                                    result[aaa[0]][aaa[1]] = z
+                        elif a == 2:
+                            for aaa in zip(range(tx + ax[a], tx), range(ty + ay[a], ty)):
+                                if result[aaa[0]][aaa[1]] != 0:
+                                    result[aaa[0]][aaa[1]] = z
+                        elif a == 3:
+                            for aaa in zip(range(tx + ax[a], tx), range(ty + ay[a], ty, -1)):
+                                if result[aaa[0]][aaa[1]] != 0:
+                                    result[aaa[0]][aaa[1]] = z
+    cnt1, cnt2 = 0, 0
+    for i in result:
+        for j in i:
+            if j == 1:
+                cnt1 += 1
+            elif j == 2:
+                cnt2 += 1
+    print(f'#{test_case} {cnt1} {cnt2}')
+>>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
     # ///////////////////////////////////////////////////////////////////////////////////
+    #
