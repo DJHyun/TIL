@@ -1,5 +1,15 @@
 # baekjoon source = "https://www.acmicpc.net/problem/2750"
-
+'''
+8
+69
+10
+30
+2
+16
+8
+31
+22
+'''
 import sys
 
 n = int(sys.stdin.readline())
@@ -16,10 +26,10 @@ for s_num in range(len(second)):
             if f_num == 0:
                 first.insert(f_num,second[s_num])
         else:
-            if f_num == 0:
-                first.insert(f_num+1,second[s_num])
-        print(first[f_num],first,second)
+            first.insert(f_num+1,second[s_num])
+            break
 
-print(first,second)
+for i in first:
+    print(i)
         
     

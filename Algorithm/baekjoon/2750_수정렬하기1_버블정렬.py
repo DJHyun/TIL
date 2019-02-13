@@ -1,5 +1,14 @@
 # baekjoon source = "https://www.acmicpc.net/problem/2750"
-
+'''
+69
+10
+30
+2
+16
+8
+31
+22
+'''
 import sys
 
 n = int(sys.stdin.readline())
