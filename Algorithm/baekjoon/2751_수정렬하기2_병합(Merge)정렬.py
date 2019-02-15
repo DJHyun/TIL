@@ -35,30 +35,39 @@ for i in range(T):
 
 #     return result
 
-def merge_sort(m):
 
-    if len(m) <= 1:
+def merge_sort(m):
+    len_ = len(m)
+
+    if len_ <= 1:
         return m
 
-    left = merge_sort(m[:len(m)//2])
-    right = merge_sort(m[len(m)//2:])
+    left = merge_sort(m[:len_//2])
+    right = merge_sort(m[len_//2:])
 
     return merge(left, right)
 
 def merge(left,right):
     
-    result = []
+    idx = 0
+    result = [0]*(len(left)+len(right))
 
     while left and right:
         if left[0] <= right[0]:
-            result.append(left.pop(0))
+            result[idx] = left.pop(0)
+            idx += 1
         else:
-            result.append(right.pop(0))
+            result[idx] = right.pop(0)
+            idx += 1
 
     if left:
-        result.extend(left)
+        for i in left:
+            result[idx] = i
+            idx += 1
     if right:
-        result.extend(right)
+        for i in right:
+            result[idx] = i
+            idx += 1
     
     return result
 
