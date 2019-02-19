@@ -10,20 +10,15 @@ for test_case in range(T):
     number[0], number[1] = 0,0
     sq = int(math.sqrt(n))
 
-    j = 2
     for i in range(2,sq+1):
+        j = 2
         if number[i]:
             while i*j < (n+1):
                 number[i*j] = 0
                 j += 1
-    max_, min_ = 0,0
 
-    for i in range(len(number)):
+    for i in range((n+1)//2,-1,-1):
         if number[i]:
-            if n-i in number:
-                min_ = i
-                max_ = n-i
-
-    print(min_,max_)
-
-    
+            if number[n-i]:
+                print(i,n-i)
+                break
