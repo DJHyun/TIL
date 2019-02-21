@@ -33,70 +33,21 @@ import sys
       아래 구문을 사용하기 위해서는 import sys가 필요합니다.
 
       단, 채점을 위해 코드를 제출하실 때에는 반드시 아래 구문을 지우거나 주석 처리 하셔야 합니다.
-<<<<<<< HEAD
 """
 sys.stdin = open("재미있는오셀로게임.txt", "r")
-=======
-'''
-# sys.stdin = open("재미있는오셀로게임.txt", "r")
->>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
 
 T = int(input())
 # 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
 for test_case in range(1, T + 1):
     # ///////////////////////////////////////////////////////////////////////////////////
-    N, M = list(map(int, input().split()))
+    n, M = list(map(int, input().split()))
     result = []
-<<<<<<< HEAD
-    for i in range(N):
-        result.append([0] * N)
-    for i in range(2):
-        result[N // 2 - i][N // 2 - i] = 2
-        if i == 0:
-            result[N // 2 - 1][N // 2] = 1
-        else:
-            result[N // 2][N // 2 - 1] = 1
-=======
->>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
 
     for m in range(M):
         test_x, test_y, tz = list(map(int, input().split()))
         tx, ty = test_x - 1, test_y - 1
         result[tx][ty] = tz
 
-<<<<<<< HEAD
-        for i in range(2, N):
-            x, y = [i, -i, 0, 0, i, -i, -i, i], [0, 0, i, -i, i, -i, i, -i]
-            for j in range(8):
-                if tx + x[j] < 0 or tx + x[j] >= N or ty + y[j] < 0 or ty + y[j] >= N:
-                    continue
-                else:
-                    if result[tx + x[j]][ty + y[j]] == tz:
-                        for a in range(1, i):
-                            ax, ay = (
-                                [a, -a, 0, 0, a, -a, -a, a],
-                                [0, 0, a, -a, a, -a, a, -a],
-                            )
-                            if result[tx + ax[j]][ty + ay[j]] == 0:
-                                break
-                        else:
-                            for a in range(1, i):
-                                ax, ay = (
-                                    [a, -a, 0, 0, a, -a, -a, a],
-                                    [0, 0, a, -a, a, -a, a, -a],
-                                )
-                                if result[tx + ax[j]][ty + ay[j]] == tz:
-                                    break
-                                else:
-                                    result[tx + ax[j]][ty + ay[j]] = tz
-
-    one = 0
-    two = 0
-    for i in result:
-        one += i.count(1)
-        two += i.count(2)
-    print(f"#{test_case} {one} {two}")
-=======
     for i in range(n // 2 - 1, n // 2 + 1):
         for j in range(n // 2 - 1, n // 2 + 1):
             if i == j:
@@ -165,6 +116,5 @@ for test_case in range(1, T + 1):
             elif j == 2:
                 cnt2 += 1
     print(f'#{test_case} {cnt1} {cnt2}')
->>>>>>> 2a7311c0e335cde5218be21f820532eb55304116
     # ///////////////////////////////////////////////////////////////////////////////////
     #
