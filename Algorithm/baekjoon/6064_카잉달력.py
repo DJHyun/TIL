@@ -5,50 +5,30 @@ T = int(sys.stdin.readline())
 
 for _ in range(T):
     M,N,x,y = map(int,sys.stdin.readline().split())
-    a,b,cnt = 1,1,1
+    
+    if M > N:
+        min_year = N
+        min_ = y
+        check = x
+    else:
+        min_year = M
+        min_ = x
+        check = y
+    sub_year = abs(M-N)
 
-    while M != a or b != N:
+    c = min_
+    cnt = min_
 
-        if a < M:
-            a += 1
+    while c != check:
+        cnt += min_year
+
+        if c - sub_year <= 0:
+            c = c - sub_year +max(M,N)
         else:
-            a = 1
-        
-        if b < N:
-            b += 1
-        else:
-            b = 1
-        
-        cnt += 1
-        print(a,b,cnt)
-        if a == x and b == y:
-            print(cnt)
+            c = c - sub_year
+
+        if c == min_:
+            print(-1)
             break
     else:
-        print(-1)
-
-    
-    X = [M,x]; Y=[N,y]
-    min_ = min(M,N)
-    print(X,Y)
-    a,b = 0, 0
-
-    # if min_ in X:
-    #     if (y - x) < 0:
-    #         Y[1] = N - (y -x)
-    #     else:
-    #         Y[1] = y - x
-    #     X[1] = M
-        
-    #     while Y[1] != N:
-    #         N -= 2
-    #         b += 1
-        
-    #     a = M*b
-
-    #     while Y[1] 
-        
-
-
-
-    print(X,Y)
+        print(cnt)

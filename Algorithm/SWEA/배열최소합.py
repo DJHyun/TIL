@@ -24,6 +24,7 @@ def construct(a, k, input, c):
         in_perm[a[i]] = True
     
     ncandi = 0
+
     for i in range(0, input):
         if in_perm[i] == False:
             c[ncandi] = i
@@ -37,7 +38,6 @@ for test_case in range(1, T + 1):
     ncandi = N
     a = [0] * (N+1)
     sum_ = 9999
-    
     arr = [list(map(int, input().split())) for x in range(N)]
 
     backtrack(a, 0, N, 0)
