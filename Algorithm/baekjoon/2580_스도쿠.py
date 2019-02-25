@@ -1,4 +1,5 @@
-# baekjoon source = "https://www.acmicpc.net/problem/25800"
+# baekjoon source = "https://www.acmicpc.net/problem/2580"
+
 '''
 0 3 5 4 6 9 2 7 8
 7 8 2 1 0 5 6 0 9
@@ -9,95 +10,77 @@
 9 1 7 6 5 2 0 8 0
 6 0 3 7 0 1 9 5 2
 2 5 8 3 9 4 7 6 0
-0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0 0
-'''
 
+0 3 5 4 6 9 2 7 8
+7 8 2 1 0 5 6 0 9
+0 6 0 2 7 8 1 3 5
+3 2 1 0 4 6 8 9 7
+8 0 4 9 1 3 5 0 6
+5 9 6 8 2 0 4 1 3
+9 1 7 6 5 2 0 8 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+
+'''
 import sys
 
-number = [list(map(int,sys.stdin.readline().split())) for _ in range(9)]
-check = [1,2,3,4,5,6,7,8,9]
+def backtracking(k, input):
+    global flag
+    c = [0] * 9
+   
+    if k == input:
+        flag = False
+        return flag
+    else:
+        k += 1
+        candi = construct(k, c)
+        
+        for i in range(candi):
+            if flag:
+                arr[stack[k][0]][stack[k][1]] = c[i]
 
+                for a in range(k+1,len(stack)):
+                    arr[stack[a][0]][stack[a][1]] = 0
+
+
+                backtracking(k, input)
+                   
+def construct(k, c):
+    in_perm = [1] * 10
+
+    for i in range(9):
+        in_perm[arr[stack[k][0]][i]] = 0
+
+    for i in range(9):
+        in_perm[arr[i][stack[k][1]]] = 0
+
+    for i in range(3):
+        for j in range(3):
+            in_perm[arr[stack[k][0] + i - stack[k][0]%3][stack[k][1] + j - stack[k][1]%3]] = 0
+    
+    ncandi = 0
+
+    for i in range(1,10):
+        if in_perm[i]:
+            c[ncandi] = i
+            ncandi += 1
+
+    return ncandi
+
+arr = [list(map(int,sys.stdin.readline().split())) for _ in range(9)]
+count = 0
 for i in range(9):
     for j in range(9):
-        flag = [True] * 10
-        if number[i][j] == 0:
-            for a in range(9):
-                if number[i][a] in check:
-                    flag[number[i][a]] = False
-                if number[a][j] in check:
-                    flag[number[a][j]] = False
-                if i == 0 or i == 3 or i == 6:
-                    if j == 0 or j == 3 or j == 6:
-                        for b in range(1,3):
-                            if number[i+b][j+b] in check:
-                                flag[number[i][b]] = False
-                            if number[i+b][j+3-b] in check:
-                                flag[number[i+b][j+3-b]] = False
-                    elif j == 1 or j == 4 or j == 7:
-                        for b in range(1,3):
-                            if number[i+b][j-1] in check:
-                                flag[number[i+b][j-1]] = False
-                            if number[i+b][j+1] in check:
-                                flag[number[i+b][j-1]] = False
-                    else:
-                        for b in range(1,3):
-                            if number[i+b][j-b] in check:
-                                flag[number[i+b][j-b]] = False
-                            if number[i+b][j-3+b] in check:
-                                flag[number[i+b][j-3+b]] = False
+        if arr[i][j] == 0:
+            count += 1
+stack, top = [0] * count, -1
+flag = True
+for i in range(9):
+    for j in range(9):
+        if arr[i][j] == 0:
+            top += 1
+            stack[top] = (i,j)
+backtracking(-1,count-1)
 
-                if i == 1 or i == 4 or i == 7:
-                    if j == 0 or j == 3 or j == 6:
-                        for b in range(1,3):
-                            if number[i+b][j+b] in check:
-                                flag[number[i][b]] = False
-                            if number[i+b][j+3-b] in check:
-                                flag[number[i+b][j+3-b]] = False
-                    elif j == 1 or j == 4 or j == 7:
-                        for b in range(1,3):
-                            print(i+b, j-1)
-                            if number[i+1][j-b%2+int(b/2)] in check:
-                                flag[number[i+1][j-b%2+int(b/2)]] = False
-                            if number[i-1][j-b%2+int(b/2)] in check:
-                                flag[number[i-1][j-b%2+int(b/2)]] = False
-                    else:
-                        for b in range(1,3):
-                            if number[i-b][j-b] in check:
-                                flag[number[i+b][j-b]] = False
-                            if number[i+b][j-3+b] in check:
-                                flag[number[i+b][j-3+b]] = False
-                
-                else:
-                    if j == 0 or j == 3 or j == 6:
-                        for b in range(1,3):
-                            if number[i+b][j+b] in check:
-                                flag[number[i][b]] = False
-                            if number[i+b][j+3-b] in check:
-                                flag[number[i+b][j+3-b]] = False
-                    elif j == 1 or j == 4 or j == 7:
-                        for b in range(1,3):
-                            if number[i+b][j-1] in check:
-                                flag[number[i+b][j-1]] = False
-                            if number[i+b][j+1] in check:
-                                flag[number[i+b][j-1]] = False
-                    else:
-                        for b in range(1,3):
-                            if number[i+b][j-b] in check:
-                                flag[number[i+b][j-b]] = False
-                            if number[i+b][j-3+b] in check:
-                                flag[number[i+b][j-3+b]] = False
-
-
-            for a in range(1,10):
-                if flag[a]:
-                    number[i][j] = a
-
-for i in number:
+for i in arr:
     print(' '.join(map(str,i)))
-
-            
-                
-
-
