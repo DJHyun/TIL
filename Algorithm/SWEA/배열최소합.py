@@ -6,6 +6,7 @@ def backtrack(a, k, input,sum_num):
     c = [0] * N
 
     if k == input :
+        print(a)
         if sum_>sum_num:
             sum_=sum_num
     else:
