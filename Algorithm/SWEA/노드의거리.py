@@ -8,9 +8,11 @@ def bfs(matrix,S,G):
     result = 0
     q.append(S)
     visited[S] = 1
+    
     while q:
         sq = q[:]
         q = []
+        print(sq)
         result += 1
         while sq:
             t = sq.pop(0)
