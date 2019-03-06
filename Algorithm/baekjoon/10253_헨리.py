@@ -1,4 +1,11 @@
-# baekjoon source = "https://www.acmicpc.net/problem/2751"
+# baekjoon source = "https://www.acmicpc.net/problem/10253"
+'''
+3
+4 23
+5 7
+8 11
+'''
+
 import sys
 from fractions import Fraction
 T = int(sys.stdin.readline())
