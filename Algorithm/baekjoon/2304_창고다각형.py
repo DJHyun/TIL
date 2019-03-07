@@ -18,6 +18,28 @@
 2 10
 4 6
 8 4
+
+5
+2 10
+4 5
+6 5
+8 5
+10 10
+
+4
+2 5
+4 5
+8 5
+6 5
+
+3
+4 4
+6 2
+2 2
+
+1
+2 5
+
 '''
 import sys
 
@@ -26,30 +48,20 @@ arr = [0]*N
 result = 0
 for i in range(N):
     L, H = map(int,sys.stdin.readline().split())
-    arr[i] = (L,H)
+    arr[i] = (H,L)
 
-arr.sort()
+arr = sorted(arr, key=lambda x: x[1])
 max_ = arr[0]
-print(arr)
+
 for i in range(1,N):
-    if max_[1] > arr[i][1]:
-        if i == N-1:
-            result += (arr[i][0] - max_[0]+1)*arr[i][1]
-            result += max_[1] - arr[i][1]
-        elif i == 1:
-            result += max_[1]
-
-        if arr[i][1] == max(arr[i:][0]):
-            max_ = arr[i]
-
+    if arr[i][0] > max_[0]:
+        result += abs(arr[i][1] - max_[1]) * max_[0]
+        max_ = arr[i]
     else:
-        if i == N-1:
-            result += (arr[i][0] - max_[0]) * max_[1]
-            result += arr[i][1]
-        else:
-            result += (arr[i][0] - max_[0]) * max_[1]
+        if arr[i] == max(arr[i:]):
+            result += (abs(arr[i][1] - max_[1]) * arr[i][0] + abs(max_[0] - arr[i][0]))
             max_ = arr[i]
 
-    print('r',result,max_)
+result += arr[N-1][0]
 
 print(result)
