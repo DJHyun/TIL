@@ -13,46 +13,61 @@
 '''
 import sys
 
-def check():
-    
+def check_fun():
     cnt = 0
     for i in range(5):
         if arr[i].count(0) == 5:
             cnt += 1
     if cnt >= 3:
         return True
+    for i in range(5):
+        for j in range(5):
+            if arr[j][i] == 0:
+                if j == 4:
+                    cnt += 1
+            else:
+                break
 
-    for j in range(5):
-        if arr[j][i] == 0:
-            if j == 4:
+    if cnt >= 3:
+        return True
+    for i in range(5):
+        if arr[i][i] == 0:
+            if i == 4:
                 cnt += 1
         else:
             break
     if cnt >= 3:
         return True
-    
-    for j in range(5):
-        if arr[j][j] == 0:
-            if j == 4:
-                cnt +=1
+
+    for i in range(4, -1, -1):
+        if arr[i][4 - i] == 0:
+            if i == 0:
+                cnt += 1
         else:
             break
-    
-    for j in range(5,-1,-1):
-        if arr[i][j] == 0:
-        
-            
+    if cnt >= 3:
+        return True
+
+    return False
 
 
-
-arr = [list(map(int,sys.stdin.readline().split())) for _ in range(5)]
-check = [list(map(int,sys.stdin.readline().split())) for _ in range(5)]
+arr = [list(map(int, sys.stdin.readline().split())) for _ in range(5)]
+check = [list(map(int, sys.stdin.readline().split())) for _ in range(5)]
+flag = True
+count = 0
 
 for i in range(5):
-    for j in range(5):
-        for a in range(5):
-            if check[i][j] in arr[a]:
-                idx = arr[a].index(check[i][j])
-                arr[a][idx] = 0
-            if arr.count(0) >= 12:
-                check()
+    if flag:
+        for j in range(5):
+            if flag:
+                for a in range(5):
+                    if check[i][j] in arr[a]:
+                        idx = arr[a].index(check[i][j])
+                        arr[a][idx] = 0
+                        count += 1
+                        break
+                if count >= 12:
+                    if check_fun():
+                        print(count)
+                        flag = False
+                        break
