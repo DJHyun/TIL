@@ -27,23 +27,14 @@
 import sys
 
 for test_case in range(1, 5):
-    num = list(map(int, sys.stdin.readline().split()))
-    one = [num[:2], num[2:4]]
-    two = [num[4:6], num[6:]]
-    print(one, two)
-    print(num)
-    if one[0][0] > two[1][0] or one[0][1] > two[1][1] or one[1][0] < two[0][0] or one[1][1] < two[0][1]:
+    x, y, p, q, a, b, c, d = list(map(int, sys.stdin.readline().split()))
+    print(x, y, p, q, a, b, c, d)
+
+    if x > c or y > d or a > p or b > q:
         print('d')
-    elif one[1][0] == two[0][0] and one[0][1] < two[1][1]:
-        print('b')
-    elif one[1][1] == two[0][1] and one[0][0] < two[1][0]:
-        print('b')
-    elif one[0][0] == two[1][0] and one[1][1] > two[0][1]:
-        print('b')
-    elif one[0][1] == two[1][1] and one[0][0] < two[1][0]:
-        print('b')
-    elif one[1][0] == two[0][0] or one[1][1] == two[0][1] or one[0][0] == two[1][0] or one[0][1] == two[1][1]:
+    elif (x == c and y == d) or (x == c and q == b) or (p == a and y == d) or (p == a and q == b):
         print('c')
+    elif x == c or y == d or a == p or b == q:
+        print('b')
     else:
         print('a')
-
