@@ -12,6 +12,28 @@
 2
 1 2
 -1 -1
+
+3
+1 2
+2 3
+-1 -1
+
+5
+1 2
+2 3
+3 4
+4 5
+-1 -1
+
+6
+1 2
+2 3
+3 4
+4 5
+5 6
+2 4
+2 5
+-1 -1
 '''
 import sys
 
@@ -31,6 +53,10 @@ while True:
 for i in range(1, N + 1):
     result.append(arr[i].count(0) - 1)
 
+for i in arr:
+    print(i)
+print()
+print(result)
 print(min(result[1:]), result.count(min(result[1:])))
 
 for i in range(1, N + 1):
