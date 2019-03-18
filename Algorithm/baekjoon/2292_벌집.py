@@ -1,3 +1,4 @@
+# baekjoon source = "https://www.acmicpc.net/problem/2292"
 import sys
 N = int(sys.stdin.readline().strip())
 bee = [2]
