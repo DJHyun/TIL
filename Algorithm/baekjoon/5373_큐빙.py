@@ -1,4 +1,22 @@
 # baekjoon source = "https://www.acmicpc.net/problem/5373"
+'''
+6
+1
+U-
+1
+U+
+1
+D-
+1
+D+
+1
+F+
+1
+F-
+'''
+
+
+
 import sys
 
 T = int(sys.stdin.readline())
@@ -62,7 +80,7 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     down[0][a] = left[2][a][:]
                 for a in range(3):
-                    left[2][a] = tmp[2-a][:]
+                    left[a][2] = tmp[2-a][:]
 
                 tmp = front[0][0]
                 front[0][0] = front[0][2]
@@ -79,7 +97,7 @@ for test_case in range(1, T + 1):
             elif check[i][0] == 'B':
                 tmp = up[0][:]
                 for a in range(3):
-                    up[0][2-a] = left[a][0][:]
+                    up[0][a] = left[2-a][0][:]
                 for a in range(3):
                     left[a][0] = down[2][a][:]
                 for a in range(3):
@@ -130,7 +148,7 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     tmp.append(up[a][2])
                 for a in range(3):
-                    up[a][2] = back[a][0][:]
+                    up[a][2] = back[2-a][0][:]
                 for a in range(3):
                     back[a][0] = down[2-a][2][:]
                 for a in range(3):
@@ -218,7 +236,7 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     right[a][2] = down[2][2-a][:]
                 for a in range(3):
-                    down[2][a] = left[2-a][0][:]
+                    down[2][a] = left[a][0][:]
                 for a in range(3):
                     left[a][0] = tmp[2-a][:]
 
@@ -283,6 +301,26 @@ for test_case in range(1, T + 1):
                 right[1][0] = right[2][1]
                 right[2][1] = right[1][2]
                 right[1][2] = tmp
+
+        for i in up:
+            print(''.join(i))
+        print()
+        for i in down:
+            print(''.join(i))
+        print()
+        for i in front:
+            print(''.join(i))
+        print()
+        for i in back:
+            print(''.join(i))
+        print()
+        for i in left:
+            print(''.join(i))
+        print()
+        for i in right:
+            print(''.join(i))
+        print()
+
 
     for i in up:
         print(''.join(i))
