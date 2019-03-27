@@ -33,6 +33,7 @@ def postorder(T):
         print(T, end=' ')
 
 
+
 print('pre', end=' ')
 preorder(1)
 print()
