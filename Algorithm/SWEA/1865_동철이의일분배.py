@@ -21,7 +21,6 @@ def backtracking(a, k, check, tree):
             for i in range(ncandi):
                 a[k] = c[i]
                 backtracking(a, k, check, tree * man[k-1][a[k]])
-                a[k] = 0
 
 def candi(a, k, check, c):
     in_perm = [False] * check
