@@ -3,40 +3,22 @@ import sys
 sys.stdin = open("3074_입국심사.txt", "r")
 
 T = int(input())
-for test_case in range(1, 2):
+for test_case in range(1, T + 1):
     n, m = map(int, input().split())
-    one = int(input())
-    two = int(input())
-    check = 3
-    if one > two:
-        flag = True
-    else:
-        flag = False
-    min_sum = 0
+    im = [int(input()) for _ in range(n)]
+    l, r = im[0], im[n - 1] * m
+    mid = (l + r) // 2
+    while l <= r:
+        sum_ = 0
+        for i in im:
+            sum_ += mid // i
+            if sum_ >= m:
+                break
 
-    for i in range(n, m):
-
-        if i <= n - 1:
-            if flag:
-                min_sum += two
-                flag = False
-            else:
-                min_sum += one
-                flag = True
+        if sum_ >= m:
+            r = mid - 1
+            mid = (l + r) // 2
         else:
-            if check > min(one, two):
-                check = 0
-                min_sum += one
-                print(min_sum)
-                flag = True
-                continue
-
-            if flag:
-                min_sum += two
-                flag = False
-            else:
-                min_sum += one
-                flag = False
-
-        check += abs(one - two)
-        print(i, min_sum - 17, check)
+            l = mid + 1
+            mid = (l + r) // 2
+    print(f'#{test_case} {l}')
