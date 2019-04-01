@@ -24,6 +24,7 @@ for test_case in range(1, T + 1):
     result = 999999999
     charge = list(map(int, input().split()))
     arr = [[] for _ in range(charge[0])]
+
     for i in range(1,len(charge)):
         for j in range(charge[i]):
             arr[i].append(i+j+1)

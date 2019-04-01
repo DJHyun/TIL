@@ -49,6 +49,8 @@ for test_case in range(1, T + 1):
 
     a = [0] * (N + 1)
     total = 99999999
-
+    for i in arr:
+        print(i)
+    print()
     solution(a, 0, N, 0)
     print(f'#{test_case} {total}')
