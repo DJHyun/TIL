@@ -29,7 +29,7 @@ for test_case in range(1, T + 1):
         if r[i][2] == -1 or r[i][0] == 0:
             continue
 
-        if r[i % 12][1] + r[(i + 1) % 12][1] + r[(i + 2) % 12][1] > prices[2] or r[i % 12][2] == 2:
+        if r[i][1] + r[(i + 1) % 12][1] + r[(i + 2) ][1] > prices[2] or r[i % 12][2] == 2:
 
             result += prices[2]
 
