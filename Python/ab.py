@@ -1,22 +1,17 @@
-T = int(input())
+def solution(x, y):
 
-for t in range(T):
-    x, y = input().split(" ")
-    x = int(x)
-    y = int(y)
-    cnt = y - x
+    if y == 2:
+        print(visited)
+        return
 
-    current = 1
-    i = 2
-    result = 1
+    if x == 6:
+        # print(visited)
+        return
 
-    while current < cnt:
-        current += i // 2
-        i += 1
-        result += 1
-        print("i : {} current : {} result : {}".format(i, current, result))
+    visited[x] = 1
+    solution(x + 1, y + 1)
+    visited[x] = 0
+    solution(x + 1, y)
 
-    if current > cnt:
-        result -= 1
-
-    print(result)
+visited = [0] * 6
+solution(0, 0)
