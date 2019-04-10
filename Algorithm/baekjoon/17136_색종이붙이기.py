@@ -4,49 +4,72 @@ def check(x):
     if x > 9: return False
     return True
 
-def solution(x, y, sum_):
+def solution(sum_, k, d, zz):
     global result
 
+    print(visited)
+    for ttt in arr:
+        print(ttt)
+    print()
 
 
-    for i in range(x,10):
-        for j in range(y,10):
+    if result <= sum_:
+        return
+
+    if zz == 1:
+        if d - k >= 5:
+            return
+
+    if k == d:
+        result = min(result, sum_)
+
+        return
+
+
+    for i in range(10):
+        for j in range(10):
             if arr[i][j] == 1:
-                for z in range(4, 0, -1):
-                    if check(i + z) and check(j + z) and visited[z] <= 3:
-                        flag = True
+                for z in range(5, 0, -1):
+                    flag = True
+                    if check(i + z - 1) and check(j + z - 1) and visited[z - 1] <= 4:
                         for a in range(i, i + z):
                             if flag:
                                 for b in range(j, j + z):
-                                    print(a,b,z)
                                     if arr[a][b] != 1:
                                         flag = False
                                         break
                             else:
                                 break
+                    else:
+                        flag = False
 
                     if flag:
-                        print('asdfasdf',z)
-                        visited[z] += 1
+                        kk = 0
+                        visited[z - 1] += 1
                         for a in range(i, i + z):
                             for b in range(j, j + z):
                                 arr[a][b] = 2
-                        if check(y+1):
-                            solution(x,y+1,sum_+1)
-                        else:
-                            solution(x+1,0,sum_+1)
+                                kk += 1
+
+                        solution(sum_ + 1, k + kk, d,z)
+
+                        visited[z - 1] -= 1
                         for a in range(i, i + z):
                             for b in range(j, j + z):
+                                # print(a,b)
                                 arr[a][b] = 1
 
-    for xxx in arr:
-        print(xxx)
-    print()
-
-
 arr = [list(map(int, input().split())) for _ in range(10)]
-visited = [0] * 5
+vv = [[0] * 10 for _ in range(10)]
+visited = [0] * 6
 result = 99999999
 
-solution(0, 0, 0)
-print(result)
+d = 0
+for i in arr:
+    d += i.count(1)
+
+solution(0, 0, d,0)
+if result == 99999999:
+    print(-1)
+else:
+    print(result)
