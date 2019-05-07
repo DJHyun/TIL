@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo App</title>
+</head>
+
+<body>
+  <div id="app">
+    <span v-html="header"></span>
+    <h2>{{ subheader }}</h2>
+    <h2>{{ subheader }}</h2>
+    <h2>{{ subheader }}</h2>
+    <h2>{{ subheader }}</h2>
+    <h2>{{ subheader }}</h2>
+    <h2>{{ subheader }}</h2>
+    <li v-for="t in todo">{{ t }}</li>
+    <p v-if="checked">{{ todo }}</p>
+    <p>{{ dongjun.major }}</p>
+    <ol>
+      <li v-for="d in dongjun">
+        {{ d }}
+        </ll>
+    </ol>
+    <input v-model="subheader">
+  </div>
+  <!-- import 먼저 해야함 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    let app = new Vue({
+      el: '#app',
+      data: {
+        header: '<h1>Todo App</h1>',
+        subheader: 'This is Todo App',
+        todo: ['밥 먹기', '술 먹기', '클럽가기', '먹기'],
+        dongjun: {
+          name: '동준',
+          gunPil: true,
+          major: "산공",
+        },
+        checked: true,
+      }
+    })
+
+  </script>
+</body>
+
+</html>
