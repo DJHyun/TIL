@@ -16,76 +16,100 @@
 1
 0
 '''
+
+def find(add_num):
+    global check_number, final_number, n
+
+    for i in range(10-m):
+        tmp_num = add_num + num[i]
+        final_number = min(final_number, abs(int(n)-int(tmp_num))+len(tmp_num))
+        if tmp_num == n:
+            tmp_num += '0000000'
+            return
+        if len(tmp_num) < 6:
+            find(tmp_num)
+
 n = input().strip(' ')
 m = int(input())
-num = list(range(0, 10))
+num = list(map(str, list(range(0, 10))))
 if m != 0:
-    no = list(map(int, input().split()))
-st = abs(int(n) - 100)
-length = len(n)
-
+    no = list(input().split())
 for i in range(m):
     num.remove(no[i])
-print(num)
 
-# 작은것중에 최대
-min_max = -float('inf')
-if length >= 2:
-    for i in range(length - 1, length + 1):
-        if i == length - 1:
-            min_max = int(str(num[9 - m]) * i)
-        else:
-            min_candi = [0] * i
-            idx = 0
-            while idx < i:
-                if int(n[idx]) in num:
-                    min_candi[idx] = n[idx]
-                else:
-                    for j in range(9 - m, -1, -1):
-                        if num[j] < int(n[idx]):
-                            min_candi[idx] = str(num[j])
-                            break
-                idx += 1
-    min_candi = int(''.join(min_candi))
-    print(min_max, min_candi)
-    min_candi = abs(int(n) - min_candi) + len(str(min_candi))
-    min_max = abs(int(n) - min_max) + len(str(min_max))
-    min_max = min(min_max, min_candi)
-else:
-    for i in range(9 - m, -1, -1):
-        if num[i] < int(n):
-            min_max = num[i]
-            break
-    min_max = abs(int(n) - min_max) + 1
+st = abs(int(n) - 100)
+final_number = float('inf')
+find('')
+final_number = min(final_number, st)
 
-print(min_max)
+print(final_number)
 
-# 큰것 중 최소값
-max_min = float('inf')
-if length >= 2:
-    for i in range(length, length + 2):
-        max_candi = [0] * i
-        idx = 0
-        while idx < i:
-            if int(n[idx]) in num:
-                max_candi[idx] = n[idx]
-            else:
-                for j in range(10 - m):
-                    print(j)
-                    if num[j] > int(n[idx]):
-                        max_candi[idx] = str(num[j])
-                        break
-            print('idx', idx)
-            print(max_candi)
-            idx += 1
-        max_candi = int(''.join(max_candi))
-        print(max_candi)
-else:
-    for i in range(10 - m):
-        if num[i] > int(n):
-            max_min = num[i]
-            break
-    max_min = abs(int(n) - max_min) + 1
+
+
+
+#
+# for i in range(m):
+#     num.remove(no[i])
+# print(num)
+#
+# # 작은것중에 최대
+# min_max = -float('inf')
+# if length >= 2:
+#     for i in range(length - 1, length + 1):
+#         if i == length - 1:
+#             min_max = int(str(num[9 - m]) * i)
+#         else:
+#             min_candi = [0] * i
+#             idx = 0
+#             while idx < i:
+#                 if int(n[idx]) in num:
+#                     min_candi[idx] = n[idx]
+#                 else:
+#                     for j in range(9 - m, -1, -1):
+#                         if num[j] < int(n[idx]):
+#                             min_candi[idx] = str(num[j])
+#                             break
+#                 idx += 1
+#     min_candi = int(''.join(min_candi))
+#     print(min_max, min_candi)
+#     min_candi = abs(int(n) - min_candi) + len(str(min_candi))
+#     min_max = abs(int(n) - min_max) + len(str(min_max))
+#     min_max = min(min_max, min_candi)
+# else:
+#     for i in range(9 - m, -1, -1):
+#         if num[i] < int(n):
+#             min_max = num[i]
+#             break
+#     min_max = abs(int(n) - min_max) + 1
+#
+# print(min_max)
+#
+# # 큰것 중 최소값
+# max_min = float('inf')
+# if length >= 2:
+#     for i in range(length, length + 2):
+#         max_candi = [0] * i
+#         idx = 0
+#         while idx < i:
+#             if int(n[idx]) in num:
+#                 max_candi[idx] = n[idx]
+#             else:
+#                 for j in range(10 - m):
+#                     print(j)
+#                     if num[j] > int(n[idx]):
+#                         max_candi[idx] = str(num[j])
+#                         break
+#             print('idx', idx)
+#             print(max_candi)
+#             idx += 1
+#         max_candi = int(''.join(max_candi))
+#         print(max_candi)
+# else:
+#     for i in range(10 - m):
+#         if num[i] > int(n):
+#             max_min = num[i]
+#             break
+#     max_min = abs(int(n) - max_min) + 1
 
 #
 # import itertools

@@ -1,64 +1,143 @@
 # baekjoon source = "https://www.acmicpc.net/problem/16235"
-import time
+'''
+5 2 1
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 1 3
+3 2 3
+
+5 2 7
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 3 2 3 2
+2 1 3
+3 2 3
+
+10 1 1000
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+100 100 100 100 100 100 100 100 100 100
+1 1 1
+
+2 1 2
+0 100
+0 0
+1 2 5
+'''
 
 def check(x, y):
     global n
-
     if x < 0 or x > n - 1: return False
     if y < 0 or y > n - 1: return False
     return True
 
-st = time.time()
-
 n, m, k = map(int, input().split())
-arr = [[5] * n for _ in range(n)]
-value_arr = [list(map(int, input().split())) for _ in range(n)]
-tree = []
+arr = [[5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] * n for _ in range(n)]
+add_arr = [list(map(int, input().split())) for _ in range(n)]
+tree = [[0] * 3 for _ in range(m)]
+print(arr)
+for i in arr:
+    print(i)
+print()
 for i in range(m):
-    nn = list(map(int, input().split()))
-    tree.append([nn[2], nn[0], nn[1]])
+    tree_input = list(map(int, input().split()))
+    tree_input[0] -= 1
+    tree_input[1] -= 1
+    print(tree_input[2])
+    print(arr[tree_input[0]][tree_input[1]][tree_input[2]])
+    arr[tree_input[0]][tree_input[1]][tree_input[2]] += 1
+# tree = [list(map(int, input().split())) for _ in range(m)]
+tree = sorted(tree, key=lambda x: x[2])
+dx, dy = [-1, -1, -1, 0, 0, 1, 1, 1], [-1, 0, 1, -1, 1, -1, 0, 1]
 
-dx, dy = [1, 1, 1, -1, -1, -1, 0, 0], [1, 0, -1, 1, 0, -1, 1, -1]
+print(n, m, k)
 
-for aa in range(k):
-    print(aa)
-    yang = []
-    len_tree = len(tree)
-    tree.sort()
-    i = 0
-    gogo = []
+for i in add_arr:
+    print(i)
+print()
 
-    while i < len_tree:
-
-        if not arr[tree[i][1] - 1][tree[i][2] - 1]:
-            yang.append(tree.pop(i))
-            len_tree -= 1
-        elif arr[tree[i][1] - 1][tree[i][2] - 1] >= tree[i][0]:
-            arr[tree[i][1] - 1][tree[i][2] - 1] -= tree[i][0]
-            tree[i][0] += 1
-            if not tree[i][0] % 5:
-                gogo.append(tree[i])
-            i += 1
-        else:
-            yang.append(tree.pop(i))
-            len_tree -= 1
-
-    len_yang = len(yang)
-    for i in range(len_yang):
-        arr[yang[i][1] - 1][yang[i][2] - 1] += (yang[i][0] // 2)
-
-    for i in range(len(gogo)):
-        if not tree[i][0] % 5:
-            for j in range(8):
-                xx = (tree[i][1] - 1) + dx[j]
-                yy = (tree[i][2] - 1) + dy[j]
-                if check(xx, yy):
-                    tree += [[1, xx + 1, yy + 1]]
-
-    # print(tree)
-    for i in range(n):
-        for j in range(n):
-            arr[i][j] += value_arr[i][j]
-
-print(len(tree))
-print(time.time() - st)
+for i in tree:
+    print(i)
+print()
+#
+# idx = 0
+# while idx < k:
+#     # 봄
+#     for i in range(m):
+#         if not tree[i][3]:
+#             if arr[tree[i][0]][tree[i][1]] >= tree[i][2]:
+#                 arr[tree[i][0]][tree[i][1]] -= tree[i][2]
+#                 tree[i][2] += 1
+#             else:
+#                 tree[i][3] = 1
+#
+#     # for i in arr:
+#     #     print(i)
+#     # print()
+#     # for i in tree:
+#     #     print(i)
+#     # print()
+#
+#     # 여름
+#     for i in range(m):
+#         if tree[i][3]:
+#             arr[tree[i][0]][tree[i][1]] += tree[i][2] // 2
+#
+#     # for i in arr:
+#     #     print(i)
+#     # print()
+#
+#     # 가을
+#     new_tree = 0
+#     for mix in range(m):
+#         mix += new_tree
+#         if not tree[mix][3] and not tree[mix][2] % 5:
+#             for j in range(8):
+#                 tx = tree[mix][0] + dx[j]
+#                 ty = tree[mix][1] + dy[j]
+#                 if check(tx, ty):
+#                     tree.insert(0,([tx, ty, 1, 0]))
+#                     mix += 1
+#                     new_tree += 1
+#                     m += 1
+#
+#
+#     # for i in arr:
+#     #     print(i)
+#     # print()
+#     # for i in tree:
+#     #     print(i)
+#     # print()
+#
+#     # 겨울
+#     for i in range(n):
+#         for j in range(n):
+#             arr[i][j] += add_arr[i][j]
+#
+#     # for i in arr:
+#     #     print(i)
+#     # print()
+#     # for i in tree:
+#     #     print(i)
+#
+#     idx += 1
+#
+#     print(m,idx)
+#
+# result = 0
+# for i in range(m):
+#     if not tree[i][3]:
+#         result += 1
+# print(result)
