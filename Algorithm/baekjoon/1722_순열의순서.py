@@ -19,6 +19,7 @@ n = int(sys.stdin.readline())
 m = list(map(int, sys.stdin.readline().split()))
 number = list(range(1, n + 1))
 
+
 if m[0] == 1:
     result = [0]*n
     idx = 0
@@ -48,7 +49,7 @@ else:
             idx += 1
             continue
 
-        if not visited[idx]:
+        if not visited[input_number[i]-1]:
             visited[input_number[i]-1] = 1
             r = visited[0:input_number[i]-1].count(0)
             result += fact(n-(i+1))*r

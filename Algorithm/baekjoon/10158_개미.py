@@ -3,33 +3,45 @@
 6 4
 4 1
 8
+
+0 1
+
+40000 40000
+0 0
+200000000
 '''
-import sys
 
-w, h = map(int, sys.stdin.readline().split())
-q, p = map(int, sys.stdin.readline().split())
-t = int(sys.stdin.readline())
-p_flag, q_flag = 1, 1
+y, x = map(int, input().split())
+q, p = map(int, input().split())
+t = int(input())
 
-for i in range(t % (w * h)):
-    if p + 1 > h:
-        p_flag = 0
-    elif p - 1 < 0:
-        p_flag = 1
+# p_flag, q_flag = 1, 1
+# for i in range(t % (w * h)):
+#     if p + 1 > h:
+#         p_flag = 0
+#     elif p - 1 < 0:
+#         p_flag = 1
+#
+#     if p_flag:
+#         p += 1
+#     else:
+#         p -= 1
+#
+#     if q + 1 > w:
+#         q_flag = 0
+#     elif q - 1 < 0:
+#         q_flag = 1
+#
+#     if q_flag:
+#         q += 1
+#     else:
+#         q -= 1
+#
+# print(p, q)
 
-    if p_flag:
-        p += 1
-    else:
-        p -= 1
+print(x, y)
+print(p, q)
+print(t)
 
-    if q + 1 > w:
-        q_flag = 0
-    elif q - 1 < 0:
-        q_flag = 1
-
-    if q_flag:
-        q += 1
-    else:
-        q -= 1
-
-print(q, p)
+print(t % (x * 2))
+print(t % (y * 2))
