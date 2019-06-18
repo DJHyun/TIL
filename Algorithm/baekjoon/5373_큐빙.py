@@ -13,7 +13,7 @@ D+
 F+
 1
 F-
-
+X
 4
 1
 L-
@@ -27,17 +27,17 @@ L- U- L+ U- L- U- U- L+ U+ U+
 
 import sys
 
-T = int(sys.stdin.readline())
+T = int(input())
 for test_case in range(1, T + 1):
-    up = [['w']*3 for _ in range(3)]
-    front = [['r']*3 for _ in range(3)]
-    down = [['y']*3 for _ in range(3)]
-    left = [['g']*3 for _ in range(3)]
-    right = [['b']*3 for _ in range(3)]
-    back = [['o']*3 for _ in range(3)]
+    up = [['w'] * 3 for _ in range(3)]
+    front = [['r'] * 3 for _ in range(3)]
+    down = [['y'] * 3 for _ in range(3)]
+    left = [['g'] * 3 for _ in range(3)]
+    right = [['b'] * 3 for _ in range(3)]
+    back = [['o'] * 3 for _ in range(3)]
 
-    n = int(sys.stdin.readline())
-    check = sys.stdin.readline().strip().split()
+    n = int(input())
+    check = input().split()
 
     for i in range(n):
         if check[i][1] == '-':
@@ -84,11 +84,11 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     up[2][a] = right[a][0][:]
                 for a in range(3):
-                    right[a][0] = down[0][2-a][:]
+                    right[a][0] = down[0][2 - a][:]
                 for a in range(3):
                     down[0][a] = left[2][a][:]
                 for a in range(3):
-                    left[a][2] = tmp[2-a][:]
+                    left[a][2] = tmp[2 - a][:]
 
                 tmp = front[0][0][:]
                 front[0][0] = front[0][2][:]
@@ -105,11 +105,11 @@ for test_case in range(1, T + 1):
             elif check[i][0] == 'B':
                 tmp = up[0][:]
                 for a in range(3):
-                    up[0][a] = left[2-a][0][:]
+                    up[0][a] = left[2 - a][0][:]
                 for a in range(3):
                     left[a][0] = down[2][a][:]
                 for a in range(3):
-                    down[2][a] = right[2-a][2][:]
+                    down[2][a] = right[2 - a][2][:]
                 for a in range(3):
                     right[a][2] = tmp[a][:]
 
@@ -135,9 +135,9 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     front[a][0] = down[a][0][:]
                 for a in range(3):
-                    down[a][0] = back[2-a][2][:]
+                    down[a][0] = back[2 - a][2][:]
                 for a in range(3):
-                    back[a][2] = tmp[2-a][:]
+                    back[a][2] = tmp[2 - a][:]
 
                 tmp = left[0][0][:]
                 left[0][0] = left[0][2][:]
@@ -156,9 +156,9 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     tmp.append(up[a][2][:])
                 for a in range(3):
-                    up[a][2] = back[2-a][0][:]
+                    up[a][2] = back[2 - a][0][:]
                 for a in range(3):
-                    back[a][0] = down[2-a][2][:]
+                    back[a][0] = down[2 - a][2][:]
                 for a in range(3):
                     down[a][2] = front[a][2][:]
                 for a in range(3):
@@ -217,11 +217,11 @@ for test_case in range(1, T + 1):
             elif check[i][0] == 'F':
                 tmp = up[2][:]
                 for a in range(3):
-                    up[2][a] = left[2-a][2][:]
+                    up[2][a] = left[2 - a][2][:]
                 for a in range(3):
                     left[a][2] = down[0][a][:]
                 for a in range(3):
-                    down[0][a] = right[2-a][0][:]
+                    down[0][a] = right[2 - a][0][:]
                 for a in range(3):
                     right[a][0] = tmp[a][:]
 
@@ -242,11 +242,11 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     up[0][a] = right[a][2][:]
                 for a in range(3):
-                    right[a][2] = down[2][2-a][:]
+                    right[a][2] = down[2][2 - a][:]
                 for a in range(3):
                     down[2][a] = left[a][0][:]
                 for a in range(3):
-                    left[a][0] = tmp[2-a][:]
+                    left[a][0] = tmp[2 - a][:]
 
                 tmp = back[0][0][:]
                 back[0][0] = back[2][0][:]
@@ -265,9 +265,9 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     tmp.append(up[a][0][:])
                 for a in range(3):
-                    up[a][0] = back[2-a][2][:]
+                    up[a][0] = back[2 - a][2][:]
                 for a in range(3):
-                    back[a][2] = down[2-a][0][:]
+                    back[a][2] = down[2 - a][0][:]
                 for a in range(3):
                     down[a][0] = front[a][0][:]
                 for a in range(3):
@@ -294,9 +294,9 @@ for test_case in range(1, T + 1):
                 for a in range(3):
                     front[a][2] = down[a][2][:]
                 for a in range(3):
-                    down[a][2] = back[2-a][0][:]
+                    down[a][2] = back[2 - a][0][:]
                 for a in range(3):
-                    back[a][0] = tmp[2-a][:]
+                    back[a][0] = tmp[2 - a][:]
 
                 tmp = right[0][0][:]
                 right[0][0] = right[2][0][:]

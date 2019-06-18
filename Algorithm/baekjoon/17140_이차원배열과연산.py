@@ -1,67 +1,102 @@
 # baekjoon source = "https://www.acmicpc.net/problem/17140"
 
+'''
+1 2 3
+1 2 1
+2 1 3
+3 3 3
+
+2
+'''
 r, c, k = map(int, input().split())
-arr = [list(map(int, input().split())) for _ in range(3)]
 r -= 1
 c -= 1
-flag = True
+arr = [list(map(int, input().split())) for _ in range(3)]
+garo = 3
+sero = 3
 result = 0
-idx = 3
 
-print(r, c, k)
-for i in arr:
-    print(i)
+if r < garo and c < sero:
+    k_re = arr[r][c]
+else:
+    k_re = 0
 
-while arr[r][c] != k:
-    if arr[r][c] > 100:
+while k_re != k:
+
+    if result > 100:
+        result = -1
         break
 
-    if flag:
-        length = 0
-        for i in range(len(arr)):
-            make = {}
-            for j in arr[i]:
-                if j == 0:
-                    continue
-                if j not in make:
-                    make[j] = 1
-                else:
-                    make[j] += 1
-            length = max(length, len(make))
-            make = sorted(make.items(), key=lambda x: (x[1], x[0]))
-            arr[i] = []
-            for j in make:
-                arr[i] += j
-    else:
-        length = 0
-        for i in range(len(arr)):
-            make = {}
-            for j in arr[i]:
-                if j == 0:
-                    continue
-                if j not in make:
-                    make[j] = 1
-                else:
-                    make[j] += 1
-            length = max(length, len(make))
-            make = sorted(make.items(), key=lambda x: (x[1], x[0]))
-            arr[i] = []
-            for j in make:
-                arr[i] += j
-
-    for i in range(len(arr)):
-        if len(arr[i]) < (length * 2):
-            arr[i] += ([0] * (length * 2 - len(arr[i])))
-
-    for i in arr:
-        print(i)
-
-    if idx < (length * 2):
-        idx = (length * 2)
-        if flag:
-            flag = False
-        else:
-            flag = True
     result += 1
 
+    if garo >= sero:
+        check = [{} for _ in range(garo)]
+        len_ = 0
+        for i in range(garo):
+            count = 0
+            for j in range(sero):
+                if arr[i][j] == 0:
+                    continue
+                if arr[i][j] not in check[i]:
+                    check[i][arr[i][j]] = 1
+                else:
+                    check[i][arr[i][j]] += 1
+                count +=2
+                if count > 100:
+                    break
+            check[i] = sorted(check[i].items(), key=lambda x: (x[1], x[0]))
+            len_ = max(len_, len(check[i]) * 2)
+
+        new_arr = [[0] * len_ for _ in range(garo)]
+
+        for i in range(garo):
+            new_idx = 0
+            for j in range(len(check[i])):
+                new_arr[i][new_idx] = check[i][j][0]
+                new_arr[i][new_idx + 1] = check[i][j][1]
+                new_idx += 2
+
+        # for i in new_arr:
+        #     print(i)
+        # print()
+
+        arr = new_arr
+        sero = len_
+    else:
+
+        check = [{} for _ in range(sero)]
+        len_ = 0
+
+        for i in range(sero):
+            count = 0
+            for j in range(garo):
+                if arr[j][i] == 0:
+                    continue
+                if arr[j][i] not in check[i]:
+                    check[i][arr[j][i]] = 1
+                else:
+                    check[i][arr[j][i]] += 1
+                count += 2
+                if count > 100:
+                    break
+            check[i] = sorted(check[i].items(), key=lambda x: (x[1], x[0]))
+            len_ = max(len_, len(check[i]) * 2)
+
+        new_arr = [[0] * sero for _ in range(len_)]
+        for i in range(sero):
+            new_idx = 0
+            for j in range(len(check[i])):
+                new_arr[new_idx][i] = check[i][j][0]
+                new_arr[new_idx + 1][i] = check[i][j][1]
+                new_idx += 2
+
+        # for i in new_arr:
+        #     print(i)
+        # print()
+
+        arr = new_arr
+        garo = len_
+
+    if r < garo and c < sero:
+        k_re = arr[r][c]
 print(result)
