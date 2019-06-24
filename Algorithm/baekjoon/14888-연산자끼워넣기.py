@@ -1,27 +1,11 @@
 # baekjoon source = "https://www.acmicpc.net/problem/14888"
+import itertools
+'''
+11
+1 2 3 4 5 6 7 8 9 10 11
+3 2 3 2
 
-def solution(idx, sum_):
-    q = [[sum_, idx, [0] * (n - 1)]]
-    max_ = float('-inf')
-    min_ = float('inf')
-    while q:
-        t = q.pop(0)
-        max_ = max(max_, t[0])
-        min_ = min(min_, t[0])
-        for i in range(idx, n):
-            for j in range(n - 1):
-                if not t[2][j]:
-                    t[2][j] = 1
-                    if method[j] == 1:
-                        q.append([t[0] + number[i], t[2]])
-                    elif method[j] == 2:
-                        q.append([t[0] - number[i], t[2]])
-                    elif method[j] == 3:
-                        q.append([t[0] * number[i], t[2]])
-                    else:
-                        q.append([t[0] // number[i], t[2]])
-
-    return [max_, min_]
+'''
 
 n = int(input())
 number = list(map(int, input().split()))
@@ -32,9 +16,30 @@ for i in range(len(me)):
         for j in range(me[i]):
             method.append((i + 1))
 
-print(method)
-print(n)
-print(number)
-print(me)
+min_ = float('inf')
+max_ = float('-inf')
 
-s = solution()
+it = itertools.permutations(method)
+for i in it:
+    idx = 0
+    result = number[idx]
+    for j in i:
+        idx += 1
+        if j == 1:
+            result += number[idx]
+        elif j == 2:
+            result -= number[idx]
+        elif j == 3:
+            result *= number[idx]
+        else:
+            if result < 0:
+                result = abs(result)//number[idx]
+                result *= -1
+
+            else:
+                result //= number[idx]
+    min_ = min(result, min_)
+    max_ = max(result, max_)
+
+print(max_)
+print(min_)
