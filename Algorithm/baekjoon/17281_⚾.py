@@ -37,7 +37,7 @@
 #     return [result, out, base]
 
 def solution(b):
-    global r, player,cnt
+    global r, player, cnt
 
     if b == 9:
         result = 0
@@ -93,7 +93,7 @@ def solution(b):
         if b == 3:
             solution(b + 1)
         else:
-            for i in range(1,9):
+            for i in range(1, 9):
                 if not visited[i]:
                     visited[i] = 1
                     player[b] = i
