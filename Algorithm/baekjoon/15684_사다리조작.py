@@ -6,7 +6,7 @@ def check(x, y):
     return True
 
 def make_ladder(a,b):
-    
+
     pass
 
 def ladder(a, b):
