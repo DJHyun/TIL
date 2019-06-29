@@ -1,180 +1,102 @@
 # baekjoon source = "https://www.acmicpc.net/problem/17140"
 
-# def change():
-#     global arr
-#     nArr = [[] for _ in range(y)]
-#
-#     for i in range(x):
-#         for j in range(y):
-#             nArr[j].append(arr[i][j])
-#
-#     arr = nArr
-#
-# r, c, k = map(int, input().split())
-# arr = [list(map(int, input().split())) for _ in range(3)]
-#
-# print(r, c, k)
-# for i in arr:
-#     print(i)
-# print()
-#
-# x, y = 3, 3
-# result = 0
-# while True:
-#     print(x, y, result, "번째")
-#     for i in arr:
-#         print(i)
-#     print()
-#     if r <= x - 1 and c <= y - 1:
-#         if arr[r - 1][c - 1] == k:
-#             break
-#         if arr[r - 1][c - 1] == 100:
-#             result = -1
-#             break
-#
-#     if x >= y:
-#         for i in range(x):
-#             max_ = max(arr[i]) + 1
-#             new = []
-#             new_array = []
-#             count = {}
-#             for j in range(y):
-#                 if arr[i][j] not in count:
-#                     count[arr[i][j]] = 1
-#                 else:
-#                     count[arr[i][j]] += 1
-#
-#             for j in range(len(count)):
-#                 if count[j]:
-#                     new.append([j, count[j]])
-#
-#             new = sorted(new, key=lambda x: (x[1], x[0]))
-#             for n in new:
-#                 new_array += n
-#             arr[i] = new_array
-#
-#         max_ = 0
-#         for i in arr:
-#             max_ = max(max_, len(i))
-#
-#         for i in range(x):
-#             arr[i] += [0] * (max_ - len(arr[i]))
-#         y = max_
-#
-#     else:
-#         change()
-#         for i in range(y):
-#             max_ = max(arr[i]) + 1
-#             new = []
-#             new_array = []
-#             count = [0] * max_
-#             for j in range(x):
-#                 count[arr[i][j]] += 1
-#             for j in range(1, max_):
-#                 if count[j]:
-#                     new.append([j, count[j]])
-#             new = sorted(new, key=lambda x: (x[1], x[0]))
-#             for n in new:
-#                 new_array += n
-#             arr[i] = new_array
-#
-#         max_ = 0
-#         for i in arr:
-#             max_ = max(max_, len(i))
-#
-#         for i in range(y):
-#             arr[i] += [0] * (max_ - len(arr[i]))
-#
-#         x = max_
-#         x,y = y,x
-#
-#         change()
-#
-#         x, y = y, x
-#
-#     result += 1
-#
-# print(result)
+'''
+1 2 3
+1 2 1
+2 1 3
+3 3 3
 
-
-def change():
-    global arr
-
-    new = [[0] * x for _ in range(y)]
-
-    for i in range(y):
-        for j in range(x):
-            new[i][j] = arr[j][i]
-
-    arr = new
-
+2
+'''
 r, c, k = map(int, input().split())
+r -= 1
+c -= 1
 arr = [list(map(int, input().split())) for _ in range(3)]
-
-x = 3
-y = 3
+garo = 3
+sero = 3
 result = 0
-while True:
 
-    if r <= x and c <= y:
-        if arr[r - 1][c - 1] == k:
-            break
-        if result > 100:
-            result = -1
-            break
+if r < garo and c < sero:
+    k_re = arr[r][c]
+else:
+    k_re = 0
 
-    if x >= y:
-        max_len = 0
-        for i in range(x):
-            count_num = {}
-            for j in range(y):
-                if arr[i][j]:
-                    if arr[i][j] not in count_num:
-                        count_num[arr[i][j]] = 1
-                    else:
-                        count_num[arr[i][j]] += 1
+while k_re != k:
 
-            count_num = sorted(count_num.items(), key=lambda x: (x[1], x[0]))
-            arr[i] = []
-            for j in count_num:
-                arr[i] += j
-            max_len = max(max_len, len(arr[i]))
-
-        for i in range(x):
-            arr[i] += [0] * (max_len - len(arr[i]))
-
-        y = max_len
-    else:
-        change()
-        x, y = y, x
-        max_len = 0
-
-        for i in range(x):
-            count_num = {}
-            for j in range(y):
-                if arr[i][j]:
-                    if arr[i][j] not in count_num:
-                        count_num[arr[i][j]] = 1
-                    else:
-                        count_num[arr[i][j]] += 1
-
-            count_num = sorted(count_num.items(), key=lambda x: (x[1], x[0]))
-
-            arr[i] = []
-            for j in count_num:
-                arr[i] += j
-            max_len = max(max_len, len(arr[i]))
-
-        for i in range(x):
-            arr[i] += [0] * (max_len - len(arr[i]))
-
-
-
-        y = max_len
-
-        change()
-        x,y = y,x
+    if result > 100:
+        result = -1
+        break
 
     result += 1
 
+    if garo >= sero:
+        check = [{} for _ in range(garo)]
+        len_ = 0
+        for i in range(garo):
+            count = 0
+            for j in range(sero):
+                if arr[i][j] == 0:
+                    continue
+                if arr[i][j] not in check[i]:
+                    check[i][arr[i][j]] = 1
+                else:
+                    check[i][arr[i][j]] += 1
+                count +=2
+                if count > 100:
+                    break
+            check[i] = sorted(check[i].items(), key=lambda x: (x[1], x[0]))
+            len_ = max(len_, len(check[i]) * 2)
+
+        new_arr = [[0] * len_ for _ in range(garo)]
+
+        for i in range(garo):
+            new_idx = 0
+            for j in range(len(check[i])):
+                new_arr[i][new_idx] = check[i][j][0]
+                new_arr[i][new_idx + 1] = check[i][j][1]
+                new_idx += 2
+
+        # for i in new_arr:
+        #     print(i)
+        # print()
+
+        arr = new_arr
+        sero = len_
+    else:
+
+        check = [{} for _ in range(sero)]
+        len_ = 0
+
+        for i in range(sero):
+            count = 0
+            for j in range(garo):
+                if arr[j][i] == 0:
+                    continue
+                if arr[j][i] not in check[i]:
+                    check[i][arr[j][i]] = 1
+                else:
+                    check[i][arr[j][i]] += 1
+                count += 2
+                if count > 100:
+                    break
+            check[i] = sorted(check[i].items(), key=lambda x: (x[1], x[0]))
+            len_ = max(len_, len(check[i]) * 2)
+
+        new_arr = [[0] * sero for _ in range(len_)]
+        for i in range(sero):
+            new_idx = 0
+            for j in range(len(check[i])):
+                new_arr[new_idx][i] = check[i][j][0]
+                new_arr[new_idx + 1][i] = check[i][j][1]
+                new_idx += 2
+
+        # for i in new_arr:
+        #     print(i)
+        # print()
+
+        arr = new_arr
+        garo = len_
+
+    if r < garo and c < sero:
+        k_re = arr[r][c]
 print(result)
