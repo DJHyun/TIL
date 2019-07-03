@@ -1,6 +1,6 @@
-# import sys
-#
-# sys.stdin = open('input.txt', 'r')
+import sys
+
+sys.stdin = open('input.txt', 'r')
 
 def check(x, y):
     if x < 0 or x > n - 1: return False
@@ -8,58 +8,47 @@ def check(x, y):
     return True
 
 def dfs(a, b, sum_):
-    print(a,b,sum_)
     global result
+
+    if not check(a, b):
+        return 0
+
+    if a == n - 1 and b == n - 1:
+        if result > sum_:
+            result = sum_
+            visited[a][b] = sum_
+        else:
+            return 0
 
     if sum_ >= result:
         return 0
 
-    for i in visited:
-        print(i)
-    print()
-    for i in range(4):
-        tx = a + dx[i]
-        ty = b + dy[i]
-        if tx == n - 1 and ty == n - 1:
-            result = min(result,sum_)
-            return 0
-        if check(tx, ty) and not visited[tx][ty]:
-            visited[tx][ty] = 1
-            dfs(tx, ty, sum_+arr[tx][ty])
-            visited[tx][ty] = 0
+    if sum_ < visited[a][b]:
+        visited[a][b] = sum_
+    else:
+        return 0
 
-
-def bfs():
-    q = [[0, 0, 0, 1]]
-    min_result = float('inf')
-    idx = 1
-    visited[0][0] = idx
-    while q:
-        # print(q)
-        t = q.pop(0)
-        for i in range(4):
-            tx = t[0] + dx[i]
-            ty = t[1] + dy[i]
-            if tx == n - 1 and ty == n - 1:
-                min_result = min(min_result, t[2])
-                return min_result
-            if check(tx, ty):
-                q.append([tx, ty, t[2] + arr[tx][ty], idx])
-                visited[tx][ty] = idx
+    dfs(a + 1, b, sum_ + arr[a][b])
+    dfs(a, b + 1, sum_ + arr[a][b])
+    dfs(a - 1, b, sum_ + arr[a][b])
+    dfs(a, b - 1, sum_ + arr[a][b])
 
 T = int(input())
 for test_case in range(1, T + 1):
     n = int(input())
     arr = [list(map(int, input())) for _ in range(n)]
-    dx, dy = [0, 0, 1, -1], [1, -1, 0, 0]
-    visited = [[0] * n for _ in range(n)]
-    visited[0][0] = 1
+    visited = [[float('inf')] * n for _ in range(n)]
 
     result = float('inf')
 
     print(n)
     for i in arr:
         print(i)
+    print()
+    dfs(0, 0, 0)
 
-    dfs(0,0,0)
+    for i in visited:
+        print(i)
+    print()
+
     print(f'#{test_case} {result}')
