@@ -1,5 +1,5 @@
 //baekjoon source = "https://www.acmicpc.net/problem/1001"
-package 입출력과사칙연산;
+package a_입출력과사칙연산;
 
 import java.io.BufferedReader;
 import java.io.IOException;
