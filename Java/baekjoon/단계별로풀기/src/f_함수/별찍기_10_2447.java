@@ -28,14 +28,20 @@ public class º°Âï±â_10_2447 {
 	}
 
 	public static void main(String[] args) throws IOException {
-
+		boolean flag = true;
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
-				if (i == 0 || i == n - 1 || i == 2 || i == n-3 || i == 6 || i== n-7 || j == 2) {
-					System.out.print("*");
-				} else {
-					System.out.print(solution(i, j));
+				flag = true
+				if (i % 3 == 1 && j %3 == 1) {
+					System.out.print(" ");
 				}
+				while (i > 0 && j >0) {
+					if (i % 3 == 1 && j %3 == 1) {
+						System.out.print(" ");
+						flag = false;
+					}
+				}
+				
 			}
 			if (i != n - 1) {
 				System.out.println();
