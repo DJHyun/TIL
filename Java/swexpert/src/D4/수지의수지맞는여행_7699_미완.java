@@ -1,15 +1,17 @@
+//sw expert source = "www.swexpertacademy.com/7829"
 package D4;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class 수지의수지맞는여행_7699 implements Cloneable{
+public class 수지의수지맞는여행_7699_미완 implements Cloneable {
 	static int R, C, cnt;
 	static String[][] arr;
 	static Map<String, List<Integer>> map;
@@ -33,17 +35,19 @@ public class 수지의수지맞는여행_7699 implements Cloneable{
 	}
 
 	static void bfs(int a, int b) {
-		Queue<int[]> q = new LinkedList<>();
+		
 		Queue<int[]> tq = new LinkedList<>();
+		Queue<int[]> q = new LinkedList<>();
+		Iterator<int[]> it = tq.iterator();
+		
 		tq.add(new int[] { a, b });
 		cnt = 1;
 		map.put(arr[a][b], new ArrayList());
 		map.get(arr[a][b]).add(cnt);
 
 		while (!tq.isEmpty()) {
-			q = tq;
-			tq.clear();
-			System.out.println(q+" "+tq);
+			
+			System.out.println(q + " " + tq);
 			while (!q.isEmpty()) {
 
 				for (int[] i : q) {
