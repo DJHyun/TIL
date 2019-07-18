@@ -1,4 +1,4 @@
-//baekjoon source = "https://www.acmicpc.net/problem/2292"
+//baekjoon source = "https://www.acmicpc.net/problem/1193"
 package h_수학_1;
 
 import java.io.BufferedReader;
@@ -6,34 +6,37 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 
-public class 벌집_2292 {
+public class 분수찾기_1193 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		long arr = 0;
-		long Narr = 2;
-		long n = Long.parseLong(br.readLine());
-		long idx = 1;
 
-		if (n == 1) {
-			idx = 1;
+		int x = Integer.parseInt(br.readLine());
+		int idx = 0;
+		int i = 1;
+		int mom = 1;
+		for (i = 1; idx < x; i++) {
+			idx += i;
+		}
+		i--;
+		if (i % 2 == 0) {
+			mom = i;
+			i = 1;
+			while (idx != x) {
+				idx--;
+				mom--;
+				i++;
+			}
 		} else {
-
-			while (true) {
-				if (arr > n) {
-					break;
-				} else if (arr == n) {
-					idx++;
-					break;
-				}
-				arr = Narr + 6 * idx;
-				Narr = arr;
-				idx++;
+			
+			while (idx != x) {
+				idx--;
+				mom++;
+				i--;
 			}
 		}
-		bw.write(String.valueOf(idx));
+		bw.write(mom + "/" + i);
 		bw.flush();
 	}
 }
