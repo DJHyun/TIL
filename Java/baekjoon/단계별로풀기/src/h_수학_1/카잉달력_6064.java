@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Ä«À×´Þ·Â_6064 {
 	public static void main(String[] args) throws IOException {
@@ -14,9 +15,9 @@ public class Ä«À×´Þ·Â_6064 {
 		int t = Integer.parseInt(br.readLine());
 
 		for (int T = 0; T < t; T++) {
-			String[] st = br.readLine().split(" ");
-			int m = Integer.parseInt(st[0]), n = Integer.parseInt(st[1]), x = Integer.parseInt(st[2]),
-					y = Integer.parseInt(st[3]);
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int m = Integer.parseInt(st.nextToken()), n = Integer.parseInt(st.nextToken()), x = Integer.parseInt(st.nextToken()),
+					y = Integer.parseInt(st.nextToken());
 
 			int d = m - n;
 			int check = x;
@@ -31,7 +32,6 @@ public class Ä«À×´Þ·Â_6064 {
 			if (d > 0) {
 				int c = check;
 				while (true) {
-					System.out.println(check);
 					if (check == y) {
 						break;
 					}
@@ -67,7 +67,7 @@ public class Ä«À×´Þ·Â_6064 {
 			} else {
 				result = x != y ? -1 : x;
 			}
-			bw.write(String.valueOf(result) + "\n");
+			bw.write(result + "\n");
 			bw.flush();
 		}
 	}
