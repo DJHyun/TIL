@@ -16,56 +16,41 @@ public class Ä«À×´Þ·Â_6064 {
 
 		for (int T = 0; T < t; T++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
-			int m = Integer.parseInt(st.nextToken()), n = Integer.parseInt(st.nextToken()), x = Integer.parseInt(st.nextToken()),
-					y = Integer.parseInt(st.nextToken());
+			int m = Integer.parseInt(st.nextToken()), n = Integer.parseInt(st.nextToken()),
+					x = Integer.parseInt(st.nextToken()), y = Integer.parseInt(st.nextToken());
+			int result = -1;
+			int d = Math.abs(m - n);
 
-			int d = m - n;
-			int check = x;
-			if (check > n) {
-				check %= n;
-				if (check == 0) {
-					check = 1;
-				}
-			}
-			int result = x;
-
-			if (d > 0) {
-				int c = check;
+			if (m < n) {
+				int check = x;
+				int index = x;
 				while (true) {
 					if (check == y) {
+						result = index;
 						break;
 					}
-					check += d;
-					if (check > n) {
-						check %= n;
-						if (check == 0) {
-							check = 1;
-						}
+					check -= d;
+					if(check == x) break;
+					if(check <= 0) {
+						check = n + check;
 					}
-					if (check == c) {
-						result = -1;
-						break;
-					}
-					result += m;
-				}
-			} else if (d < 0) {
-				int c = check;
-				while (true) {
-					if (check == y) {
-						break;
-					}
-					check += d;
-					if (check < 1) {
-						check += n;
-					}
-					if (check == c) {
-						result = -1;
-						break;
-					}
-					result += m;
+					index += m;
 				}
 			} else {
-				result = x != y ? -1 : x;
+				int check = y;
+				int index = y;
+				while (true) {
+					if (check == x) {
+						result = index;
+						break;
+					}
+					check -= d;
+					if(check == y) break;
+					if(check <= 0) {
+						check = m + check;
+					}
+					index += n;
+				}
 			}
 			bw.write(result + "\n");
 			bw.flush();

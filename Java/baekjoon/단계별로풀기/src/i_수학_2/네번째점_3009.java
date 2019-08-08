@@ -1,5 +1,5 @@
 //baekjoon source = "https://www.acmicpc.net/problem/3009"
-package i_수학2;
+package i_수학_2;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
