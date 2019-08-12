@@ -1,5 +1,5 @@
 //baekjoon source = "https://www.acmicpc.net/problem/2750"
-package h_정렬;
+package k_정렬;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
