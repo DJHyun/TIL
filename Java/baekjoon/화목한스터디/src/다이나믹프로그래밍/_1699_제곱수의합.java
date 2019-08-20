@@ -15,7 +15,7 @@ public class _1699_Á¦°ö¼öÀÇÇÕ {
 
 		int n = Integer.parseInt(br.readLine());
 		int number = 2;
-		int[] check = new int[n+1];
+		int[] check = new int[n + 1];
 		check[1] = 1;
 
 		for (int i = 2; i <= n; i++) {
@@ -23,9 +23,9 @@ public class _1699_Á¦°ö¼öÀÇÇÕ {
 				number++;
 				check[i] = 1;
 			} else {
-				check[i] = check[i - 1] + 1;
-				for(int j = 2; j*j<i; j++) {
-					int c = (int)i/(j*j) + check[i%(j*j)];
+				check[i] = check[i - 1] + 1; 
+				for (int j = 2; j * j < i; j++) {
+					int c = (int) i / (j * j) + check[i % (j * j)];
 					check[i] = Math.min(c, check[i]);
 				}
 			}
