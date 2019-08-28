@@ -1,4 +1,3 @@
-
 //baekjoon source = "https://www.acmicpc.net/problem/2578"
 
 import java.io.BufferedReader;
@@ -14,94 +13,56 @@ public class _2578_ºù°í {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int[][] arr = new int[5][5];
-		int[][] check = new int[5][5];
 		StringTokenizer st;
-		int result = 0;
-
 		for (int i = 0; i < 5; ++i) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < 5; ++j) {
 				arr[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
+		int[] x = new int[] { 5, 5, 5, 5, 5 };
+		int[] y = new int[] { 5, 5, 5, 5, 5 };
+		int[] z = new int[] { 5, 5 };
+		int cnt = 0, result = 0;
 
+		boolean total_flag = false;
 		for (int i = 0; i < 5; ++i) {
 			st = new StringTokenizer(br.readLine());
+			boolean mid_flag = false;
 			for (int j = 0; j < 5; ++j) {
-				int a = Integer.parseInt(st.nextToken());
-				System.out.println(a+" ");
-				boolean flag = true;
-				for (int p = 0; p < 5; ++p) {
-					if (flag) {
-						for (int q = 0; q < 5; ++q) {
-							if (arr[p][q] == a) {
-								arr[p][q] = -1;
-								result++;
-								flag = false;
+				
+				result++;
+				int check = Integer.parseInt(st.nextToken());
+				boolean flag = false;
+				
+				for (int a = 0; a < 5; ++a) {
+					for (int b = 0; b < 5; ++b) {
+						if (arr[a][b] == check) {
+							x[b]--;
+							if (x[b] == 0) cnt++;
+							y[a]--;
+							if (y[a] == 0) cnt++;
+							if (a == b) {
+								z[0]--;
+								if (z[0] == 0) cnt++;
 							}
-						}
-					} else {
-						break;
-					}
-				}
-
-				if (i >= 2) {
-					int sum = 0;
-					boolean ch = true;
-					for (int x = 0; x < 5; ++x) {
-						if (ch) {
-							for (int y = 0; y < 5; ++y) {
-								if (arr[x][y] != -1) {
-									break;
-								}
-								if (y == 4)
-									sum++;
+							if (a == 0 && b == 4 || a == 1 && b == 3 || a == 2 && b == 2 || a == 3 && b == 1 || a == 4 && b == 0 ) {
+								z[1]--;
+								if (z[1] == 0) cnt++;
 							}
-							
-							if (sum >= 3) {
-								ch = false;
-								break;
+							flag = true;
+							if (cnt >= 3) {
+								total_flag = true;
+								mid_flag = true;
 							}
-							
-							for (int y = 0; y < 5; ++y) {
-								if (arr[y][x] != -1) {
-									break;
-								}
-								if (y == 4)
-									sum++;
-							}
-							
-							if (sum >= 3) {
-								ch = false;
-								break;
-							}
-						}else {
 							break;
 						}
 					}
-					
-					if (sum <= 2) {
-						ch = true;
-						for(int x = 0; x <5; ++x) {
-							if (arr[x][x] != -1) {
-								break;
-							}
-							if (x == 4) sum++;
-							
-							if (sum >= 3)
-								break;
-						}
-						
-						for(int x = 0; x<5; ++x) {
-							if (arr[x][4-x] != -1)break;
-							if (x == 4) sum++;
-							if (sum >= 3) break;
-						}
-					}
-					System.out.println("asdfsadf"+sum);
-					if (sum >= 3) break;
+					if (flag) break;
 				}
+				if (mid_flag) break;
 			}
+			if (total_flag) break;
 		}
 		bw.write(result+"");
 		bw.flush();
