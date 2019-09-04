@@ -1,33 +1,33 @@
 # baekjoon source = "https://www.acmicpc.net/problem/1725"
+import itertools
 
 
-def solution(l, r, m):
-    global result
 
-    print(l, r, m, result)
-    result = max(result, min(arr[l:m]) * (m - l))
-    print(result)
-    result = max(result, min(arr[m:r]) * (r - m))
-    print(result)
-    result = max(result, min(arr[m:m+2])*2)
-    print("result",result)
-    c = m - 1
-    b = (l + c) // 2
-    if l != b and b != c:
-        solution(l, c, b)
 
-    a = m
-    c = r
-    b = (a + c) // 2
-    if b != c and a != b:
-        solution(a, c, b)
 
 n = int(input())
+stack = []
+numbers = [0] * n
+for i in range(n):
+    numbers[i] = int(input())
+result = float('-inf')
+i = 0
+while i < n:
+    while stack and numbers[stack[len(stack) - 1]] > numbers[i]:
+        p = stack.pop()
+        h = numbers[p]
+        w = i
+        if stack:
+            w = i - stack[len(stack) - 1] - 1
+        result = max(result, h * w)
 
-arr = [int(input()) for _ in range(n)]
-result = min(arr)*n
-left = right = mid =  0
-
-print(arr)
-solution(0, n, n // 2)
+    stack.append(i)
+    i += 1
+while stack:
+    p = stack.pop()
+    h = numbers[p]
+    w = n
+    if stack:
+        w = i - stack[len(stack) - 1] - 1
+    result = max(result, h * w)
 print(result)
