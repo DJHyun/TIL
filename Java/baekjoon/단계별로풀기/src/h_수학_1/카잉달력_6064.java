@@ -6,6 +6,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
 
 public class Ä«À×´Þ·Â_6064 {
 	public static void main(String[] args) throws IOException {
@@ -14,60 +15,44 @@ public class Ä«À×´Þ·Â_6064 {
 		int t = Integer.parseInt(br.readLine());
 
 		for (int T = 0; T < t; T++) {
-			String[] st = br.readLine().split(" ");
-			int m = Integer.parseInt(st[0]), n = Integer.parseInt(st[1]), x = Integer.parseInt(st[2]),
-					y = Integer.parseInt(st[3]);
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int m = Integer.parseInt(st.nextToken()), n = Integer.parseInt(st.nextToken()),
+					x = Integer.parseInt(st.nextToken()), y = Integer.parseInt(st.nextToken());
+			int result = -1;
+			int d = Math.abs(m - n);
 
-			int d = m - n;
-			int check = x;
-			if (check > n) {
-				check %= n;
-				if (check == 0) {
-					check = 1;
-				}
-			}
-			int result = x;
-
-			if (d > 0) {
-				int c = check;
-				while (true) {
-					System.out.println(check);
-					if (check == y) {
-						break;
-					}
-					check += d;
-					if (check > n) {
-						check %= n;
-						if (check == 0) {
-							check = 1;
-						}
-					}
-					if (check == c) {
-						result = -1;
-						break;
-					}
-					result += m;
-				}
-			} else if (d < 0) {
-				int c = check;
+			if (m < n) {
+				int check = x;
+				int index = x;
 				while (true) {
 					if (check == y) {
+						result = index;
 						break;
 					}
-					check += d;
-					if (check < 1) {
-						check += n;
+					check -= d;
+					if(check == x) break;
+					if(check <= 0) {
+						check = n + check;
 					}
-					if (check == c) {
-						result = -1;
-						break;
-					}
-					result += m;
+					index += m;
 				}
 			} else {
-				result = x != y ? -1 : x;
+				int check = y;
+				int index = y;
+				while (true) {
+					if (check == x) {
+						result = index;
+						break;
+					}
+					check -= d;
+					if(check == y) break;
+					if(check <= 0) {
+						check = m + check;
+					}
+					index += n;
+				}
 			}
-			bw.write(String.valueOf(result) + "\n");
+			bw.write(result + "\n");
 			bw.flush();
 		}
 	}
