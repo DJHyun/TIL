@@ -33,7 +33,6 @@ public class 블랙잭_2798 {
 							if (check > m) {
 								continue;
 							} else if (check == m) {
-								System.out.println("들어어ㅏ ");
 								result = check;
 								oneflag = true;
 								twoflag = true;
