@@ -1,13 +1,11 @@
 package 프로그래머스;
 
 class _2xN타일링 {
-
 	public static int solution(int n) {
 		int index = 2;
 		int left = 1;
 		int right = 2;
 		int answer = 0;
-		long number = 0;
 
 		if (n == 1) {
 			answer = 1;
@@ -16,13 +14,12 @@ class _2xN타일링 {
 		}
 
 		while (index < n) {
-			answer = (int)((left + right)%1000000007);
+			answer = (int) ((left + right) % 1000000007);
 			left = right;
 			right = answer;
 			index++;
 		}
 
-		System.out.println(n + " " + answer);
 		return answer;
 	}
 
